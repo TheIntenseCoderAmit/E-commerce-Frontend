@@ -1,0 +1,28 @@
+<div class="profile-container">
+  <div class="profile-header text-2xl"><h1>Customer Profile</h1></div>
+  <div class="profile-content">
+    <div class="profile-sidebar">
+      <div class="profile-picture"><img src="assets/profilepic.png" alt="User Avatar"></div>
+      <h2>Name: {{authService.userName}}</h2>
+      <p>Email: {{authService.userEmail}}</p></div>
+    <div class="profile-main">
+     <div>
+       <button routerLink="/order" class="orders-button"> Your orders</button>
+     </div>
+      <section class="profile-section"><h3>Account Settings</h3>
+        <form>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" value="John Doe">
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="johndoe@example.com">
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+
+          <button type="submit">Update</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

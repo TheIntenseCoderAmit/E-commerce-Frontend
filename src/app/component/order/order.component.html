@@ -1,0 +1,36 @@
+<div class="place-items-center">
+  <h2 class="text-3xl font-bold ">Order Status</h2>
+</div>
+
+<div class="order-status-container">
+
+  <div >
+    @for (order of orders; track $index) {
+     <div>
+       <h6>Order Id: {{ order._id }}</h6>
+       <span>Date:</span><span>{{ order.date | date:'mediumDate' }}</span>
+     </div>
+      <div class="mb-10 shadow-lg">
+        @for (item of order.items; track $index) {
+          <div class="order-step">
+            <div class="step-icon">
+              <span>{{ $index + 1 }}</span>
+            </div>
+            <div class="step-content">
+              <h3 class="mb-2">Product Name: {{ item.product.name }}</h3>
+<!--              <p class="mb-2">Your order is arriving in {{ Math.floor(Math.random() * (8 - 1) + 1) }} days. </p>-->
+              <span>Order Status:  </span>
+              @if(order.status=="Dispatched"){
+                <span class="step-status" style="background-color: #ffc107;">{{order.status}} </span>
+              } @else if (order.status=="Shipped"){
+                <span class="step-status" style="background-color: coral;">{{order.status}} </span>
+              } @else{
+                <span class="step-status" style="background-color: forestgreen;">{{order.status}} </span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

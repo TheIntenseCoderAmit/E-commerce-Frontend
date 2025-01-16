@@ -1,0 +1,91 @@
+
+  <body class="bg-gray-100 p-8">
+  <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+
+    <!-- Product Gallery -->
+    <div class="flex flex-col md:flex-row">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="hidden md:block" >
+          @for(url of product.images;track $index){
+            <img [src]="url" alt="Product Image" class="w-full h-auto rounded-lg" class="h-20 mt-1" (click)="changeImage(url)">
+          }
+        </div>
+        <div class="md:col-span-2">
+          <img [src]="mainImage" alt="Product Image" class="w-full h-auto rounded-lg">
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 p-4 md:pl-8">
+        <h2 class="text-2xl font-bold mb-4">{{ product.name }}</h2>
+        <p class="text-gray-700 mb-4">{{ product.shortDescription }}</p>
+        <p class="text-2xl font-bold text-green-600 mb-2 pl-2"> ₹ {{ product.Price.toLocaleString() }}</p>
+        <p class="pl-3"> {{ product.discount }}% discount on this offer. </p>
+        @if(isProductInCart(product._id!)){
+          <button class="bg-blue-500 text-white px-4 py-2 rounded-lg m-2" (click)="addToCart(product)"><mat-icon>remove_shopping_cart</mat-icon> Remove From Cart </button>
+        }
+        @else{
+          <button class="bg-blue-500 text-white px-4 py-2 rounded-lg m-2" (click)="addToCart(product)"><mat-icon>add_shopping_cart</mat-icon>  Add to Cart</button>
+        }
+
+        <span> <button mat-fab color="warn" class="float-right mr-1 mt-1" (click)="addToWishlist(product)">
+      @if (isInWishlist(product)) {
+        <mat-icon>favorite</mat-icon>
+      } @else {
+        <mat-icon>favorite_border</mat-icon>
+      }
+      </button>
+      </span>
+      </div>
+    </div>
+
+
+    <!-- Product Details -->
+    <div class="mt-8">
+      <h3 class="text-xl font-bold mb-4">Product Details</h3>
+      <p class="text-gray-700">{{ product.description }}</p>
+      <!--    <pre class="text-gray-700">{{ product.description }}</pre> -->
+    </div>
+
+    <!--similar product-->
+    @if(similarProducts.length){
+      <div class="mt-4 new-product-containe overflow-scroll" >
+        <h3 class="text-xl font-bold">Similar Product</h3>
+        <div class="flex  gap-2 ">
+          @for (product of similarProducts; track $index) {
+            <app-product-card [product]="product"></app-product-card>
+          }
+        </div>
+      </div>
+    }
+
+
+    <!-- Product Reviews -->
+    <div class="mt-8">
+      <h3 class="text-xl font-bold mb-4">Customer Reviews</h3>
+      <div class="space-y-4">
+
+        <div class="p-4 bg-gray-100 rounded-lg">
+          <h4 class="font-bold">Customer Name</h4>
+          <p class="text-gray-600">Review content goes here. It can include the customer's experience, feedback, and
+            rating of the product.</p>
+        </div>
+        <div class="p-4 bg-gray-100 rounded-lg">
+          <h4 class="font-bold">Customer Name</h4>
+          <p class="text-gray-600">Another review content goes here. More customer experiences and feedback about the
+            product.</p>
+        </div>
+      </div>
+      <div class="mt-8"><h3 class="text-xl font-bold mb-4">Leave a Review</h3>
+        <form>
+          <div class="mb-4"><label for="reviewerName" class="block text-gray-700">Your Name</label> <input type="text"
+                                                                                                           id="reviewerName"
+                                                                                                           class="w-full p-2 border border-gray-300 rounded-lg">
+          </div>
+          <div class="mb-4"><label for="reviewContent" class="block text-gray-700">Your Review</label> <textarea
+            id="reviewContent" class="w-full p-2 border border-gray-300 rounded-lg"></textarea></div>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Submit Review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+

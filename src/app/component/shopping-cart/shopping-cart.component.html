@@ -1,0 +1,144 @@
+<!--progress bar-->
+<div class="progress-container ">
+  <div class="progress-bar">
+    <div class="progress-step" [class.active]="orderStep == 0">1</div>
+    <div class="progress-step" [class.active]="orderStep == 1">2</div>
+    <div class="progress-step" [class.active]="orderStep == 2">3</div>
+  </div>
+  <div class="progress-labels">
+    <div [class.active]="orderStep == 0" class="justify-items-start">Cart</div>
+    <div [class.active]="orderStep == 1" class="pl-9">Address</div>
+    <div [class.active]="orderStep == 2" >Payment</div>
+  </div>
+</div>
+
+<!--cart page-->
+
+<div class="place-items-center">
+  <div class="cart-container ">
+    @if (orderStep == 0) {
+      <h1 class="font-bold text-3xl">Your Shopping Cart</h1>
+      <table class="cart-table">
+        <thead>
+        <tr>
+          <th class="text-left">Product</th>
+          <th class="text-center">Price</th>
+          <th class="text-left">Quantity</th>
+          <th class="text-center">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (item of cartItems; track $index) {
+            <tr>
+              <td>
+                <div class="product-info"><img [src]="item.product.images[0]" alt="Product 1">
+                  <div><p>{{ item.product.name }}</p><br>
+
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">₹{{ item.product.Price.toLocaleString() }}</td>
+              <td class="place-items-center">
+                <div class="quantity_control">
+                  <button (click)="addToCart(item.product._id!,-1)">-</button>
+                  <input type="text" value="{{item.quantity}}" min="1" class="quantity">
+                  <button (click)="addToCart(item.product._id!,1)">+</button>
+                </div>
+              </td>
+              <td class="text-center">₹{{ (item.product.Price * item.quantity).toLocaleString() }}</td>
+            </tr>
+          } @empty {
+            <h1 class="text-3xl mt-2"> Your Cart is empty </h1>
+          }
+        </tbody>
+      </table>
+      <hr>
+      <div class="cart-total">
+        <p class="text-3xl">Total Price: ₹ {{ totalAmount.toLocaleString() }}</p>
+        <button class="checkout-btn" [disabled]="cartItems[0]==null" (click)="checkout()">Checkout</button>
+      </div>
+    } @else if (orderStep == 1) {
+      <!--select address-->
+      <h1 class="font-bold text-3xl">Select Shipping Address</h1>
+      <div class="container"><h2>Fill Your Address</h2>
+        <form [formGroup]="addressForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" formControlName="name" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Address Line 1</label>
+            <input type="text" id="address" name="address" formControlName="address1" required>
+          </div>
+          <div class="form-group">
+            <label for="address2">Address Line 2</label>
+            <input type="text" id="address2" name="address2" formControlName="address2">
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required formControlName="city">
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" formControlName="state" required>
+          </div>
+          <div class="form-group">
+            <label for="zip">Pin Code</label>
+            <input type="text" id="zip" name="zip" formControlName="pin_code" required>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" (click)="addAddress()">Continue</button>
+          </div>
+        </form>
+      </div>
+    } @else if (orderStep == 2) {
+<h1 class="text-3xl font-bold text-center mb-8"></h1>
+     <div class="p-30 shadow">
+       <mat-radio-group [(ngModel)]="paymentType">
+         <mat-radio-button value="cash">Cash</mat-radio-button>
+         <mat-radio-button value="card" [disabled]="true">Card</mat-radio-button>
+       </mat-radio-group>
+
+       <div class="form-group">
+         <button type="submit" (click)="completeOrder()">Continue</button>
+       </div>
+     </div>
+
+<!--      <div class="pay_container">-->
+<!--        <h2>Payment Information</h2>-->
+<!--        <form>-->
+<!--          <div class="form-group">-->
+<!--            <label for="card-number">Card Number</label>-->
+<!--            <div class="flex">-->
+<!--              <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9101 1121" required>-->
+<!--              <div class="form-group card-icons w-10 flex ml-3">-->
+<!--                <img [src]="cardCompany[0]" alt="Visa">-->
+<!--                <img [src]="cardCompany[1]" alt="MasterCard">-->
+<!--                <img [src]="cardCompany[2]" alt="Amex">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="form-group">-->
+<!--            <label for="card-name">Name on Card</label>-->
+<!--            <input type="text" id="card-name" name="card-name" placeholder="John Doe" required>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="expiry-date">Expiry Date</label>-->
+<!--            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="cvv">CVV</label>-->
+<!--            <input type="text" id="cvv" name="cvv" placeholder="123" required>-->
+<!--          </div>-->
+
+<!--          <div class="form-group">-->
+<!--            <button  (click)="completeOrder()">Pay Now</button>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+    }
+
+  </div>
+</div>

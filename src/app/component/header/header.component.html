@@ -1,0 +1,147 @@
+<header class="grid grid-cols-12 gap-2 ">
+
+  <!--Main Logo-->
+
+
+  <div class="logo col-span-2 flex items-center cursor-pointer" routerLink="/">
+    <img [attr.src]="path" alt="logo">
+    <h1 class="text-2xl text-white">SnapShop</h1>
+  </div>
+
+
+  <!--  Search Bar-->
+  @if (authService.isLoggedIn) {
+    <div class="search-bar  col-start-5 col-end-9 place-items-center  search-container">
+      <div>
+        <input type="text" placeholder=" Search..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch($event)">
+        <button class="ml-4 p-2 border-black">
+          <i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </div>
+  } @else {
+
+    <div class=" col-start-5 col-end-9 place-items-center "><h1 class="text-white">Snap Shop Welcome's You</h1></div>
+  }
+
+  <!--profile dropdown-->
+
+
+
+
+  <div class="grid col-span-2 col-start-11 z-10 ">
+    @if (authService.isLoggedIn ) {
+      <div class="btn-group" dropdown>
+        <button type="button" class="btn btn-outline-light flex align-items-center justify-center ">
+          @if (authService.isAdmin) {
+            <button class="profile-button" routerLink="/admin">
+            <i class="fa fa-shield-alt"></i>
+            <span> {{ authService.userName }}</span>
+            </button>
+          } @else {
+            <button class="profile-button" routerLink="/profile">
+              <i class="fa fa-user"></i>
+              <span>{{ authService.userName }}</span>
+            </button>
+
+          }
+        </button>
+
+          <button id="button-split" dropdownToggle type="button"
+                  class="btn btn-outline-light  dropdown-toggle dropdown-toggle-split " aria-controls="dropdown-split">
+            <span class="caret"></span>
+            <span class="sr-only visually-hidden">Split button!</span>
+          </button>
+
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu w-full rounded" role="menu" aria-labelledby="button-basic">
+            @if(authService.isLoggedIn &&  !authService.isAdmin){
+            <li><a class="p-2" routerLink="/wishlist"> <i class="fa fa-heart"></i> Your Wishlist</a></li>
+
+            <li><a class="p-2" routerLink="/cart"> <i class="fa fa-shopping-cart"></i> Cart</a></li>
+
+            <li><a class="p-2" routerLink="/order"> <i class="fas fa-box-open orders-icon"></i> Orders</a></li>
+
+            <li class="divider dropdown-divider"></li>
+            }
+            <li role="menuitem"><a (click)="logout()" class="cursor-pointer p-2"> <i class="fa fa-sign-out-alt"></i> Logout</a></li>
+          </ul>
+
+      </div>
+    } @else {
+      <div class="flex">
+        <a routerLink="/login">
+          <button (click)="logout()" class="cursor-pointer text-white"> LogIn</button>
+        </a>
+
+        <h1 class="ml-2 text-white">|</h1>
+
+        <a routerLink="/register" class="ml-2">
+          <button (click)="logout()" class="cursor-pointer text-white"> Register</button>
+        </a>
+      </div>
+    }
+
+  </div>
+</header>
+
+
+<!-- Category Tab-->
+
+@if (authService.isLoggedIn) {
+  <nav class="  mb-2 grid row-start-2">
+    <div class="header-bottom ">
+      <ul class="flex text-white cursor-pointer ">
+        @for (category of categoryList; track $index) {
+          <li class="grid col-span-1" (click)="searchCategory(category._id!)"><a>{{ category.name }}</a></li>
+        }
+      </ul>
+    </div>
+  </nav>
+}
+
+<!--  Profile button-->
+<!--  <div class="profile-link grid col-span-2 col-start-9 col-end-10  place-items-center">-->
+<!--    @if (authService.isAdmin) {-->
+<!--      <a routerLink="/admin">-->
+<!--        <button><i class="fa-regular fa-user"></i> {{ authService.userName }}</button>-->
+<!--      </a>-->
+<!--    }-->
+<!--    @else {-->
+<!--      <a mat-fab extended routerLink="/profile">-->
+<!--        <mat-icon>account_circle</mat-icon>-->
+<!--        {{ authService.userName }}-->
+<!--      </a>-->
+<!--    }-->
+<!--  </div>-->
+
+<!--  Login Button/Logout Button-->
+
+<!--  grid col-span-3 grid-cols-3 col-start-10-->
+
+<!--    @if (authService.isLoggedIn) {-->
+
+<!--      <a class=" col-span-1" routerLink="/wishlist">-->
+<!--        Your Wishlist-->
+<!--      </a>-->
+
+<!--      <a class=" col-span-1 " routerLink="/cart">-->
+<!--        <button>-->
+<!--          &lt;!&ndash;          <mat-icon>shopping_cart</mat-icon>&ndash;&gt;-->
+<!--          Cart-->
+<!--        </button>-->
+<!--      </a>-->
+
+<!--      <a class="col-span-1">-->
+<!--        <button (click)="logout()" class="cursor-pointer  ">Logout</button>-->
+<!--      </a>-->
+
+<!--    } @else {-->
+<!--      <a routerLink="/login">-->
+<!--        <button (click)="logout()" class="cursor-pointer">LogIn</button>-->
+<!--      </a>-->
+<!--      <a routerLink="/register" class="ml-2">-->
+<!--        <button (click)="logout()" class="cursor-pointer">Register</button>-->
+<!--      </a>-->
+<!--    }-->
+
+
+

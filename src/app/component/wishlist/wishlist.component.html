@@ -1,0 +1,12 @@
+
+<header><h1>My Wishlist</h1></header>
+<section class="wishlist">
+  @for (product of wishlistService.wishlists;track $index){
+    <app-product-card [product]="product"></app-product-card>
+  }
+  @empty{
+    <h3 class="text-3xl font-bold">No Items in the Wishlist.</h3>
+  }
+
+
+</section>

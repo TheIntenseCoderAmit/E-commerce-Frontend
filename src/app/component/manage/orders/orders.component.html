@@ -1,0 +1,51 @@
+<div class="place-items-center">
+  <h2 class="text-3xl font-bold ">Order Status</h2>
+</div>
+
+<div class="order-status-container">
+
+  <div >
+    @for (order of orders; track $index) {
+      <div class="flex justify-between mb-3">
+        <div class="w-1/2 ">
+          <h6>Order Id: {{ order._id }}</h6>
+          <span>Date:</span><span>{{ order.date | date:'mediumDate' }}</span>
+          <h6>Customer Address</h6>
+          <span class="mr-1">{{order.address.address1}}</span>
+          <span>{{order.address.address2}}</span>
+          <span>{{order.address.city}}</span>
+          <span>{{order.address.pin_code}}</span>
+        </div>
+        <div class="w-1/2">
+          <mat-button-toggle-group [value]="order.status" name="status" aria-label="Font Style">
+            <mat-button-toggle value="Dispatched" (change)="statusChange($event,order)">Dispatched</mat-button-toggle>
+            <mat-button-toggle value="Shipped" (change)="statusChange($event,order)">Shipped</mat-button-toggle>
+            <mat-button-toggle value="Delivered" (change)="statusChange($event,order)">Delivered</mat-button-toggle>
+          </mat-button-toggle-group>
+
+        </div>
+      </div>
+      <div class="mb-10 shadow-lg">
+        @for (item of order.items; track $index) {
+          <div class="order-step">
+            <div class="step-icon">
+              <span>{{ $index + 1 }}</span>
+            </div>
+            <div class="step-content">
+              <h3 class="mb-2">Product Name: {{ item.product.name }}</h3>
+<!--              <p class="mb-2">Your order is arriving in {{ Math.floor(Math.random() * (8 - 1) + 1) }} days. </p>-->
+              @if(order.status=="Dispatched"){
+                <span class="step-status" style="background-color: #ffc107;">{{order.status}} </span>
+              } @else if (order.status=="Shipped"){
+                <span class="step-status" style="background-color: coral;">{{order.status}} </span>
+              } @else{
+                <span class="step-status" style="background-color: forestgreen;">{{order.status}} </span>
+              }
+
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

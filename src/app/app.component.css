@@ -1,0 +1,18 @@
+:host {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: min-content 1fr;
+  grid-template-areas: "header" "main";
+}
+
+.header {
+  grid-area: header;
+  z-index: 100;
+}
+
+.main {
+  grid-area: main;
+}
+
+/*# sourceMappingURL=app.component.css.map */

@@ -1,0 +1,66 @@
+header {
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(to right, #FC354C, #0ABFBC);
+  min-height: 68px;
+}
+
+.header-bottom a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+.logo {
+  height: 50px;
+}
+
+.search-container {
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px 0 10px 0;
+  width: 60%;
+  min-width: 300px;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 5px 5px;
+  border: 2px solid deepskyblue;
+  border-radius: 8px 8px 8px 8px;
+  outline: none;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-button:hover {
+  background-color: #45a049;
+}
+
+.profile-button i {
+  margin-right: 10px;
+}
+
+.profile-button span {
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=header.component.css.map */
