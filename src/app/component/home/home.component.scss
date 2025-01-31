@@ -1,0 +1,26 @@
+.scrollable-content-horizontal {
+  max-width: 100%; /* Set a maximum width */
+  overflow-x: scroll; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Ensure content stays in a single line */
+}
+
+/* Scrollbar styles for WebKit browsers (Chrome, Safari, Edge) */
+.scrollable-content-horizontal::-webkit-scrollbar {
+  height: 12px; /* Adjust the height of the scrollbar */
+}
+
+.scrollable-content-horizontal::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+  border-radius: 10px; /* Round track corners */
+}
+
+.scrollable-content-horizontal::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #137cbd, #3aafca); /* Gradient handle color */
+  border-radius: 10px; /* Round handle corners */
+  border: 3px solid #f1f1f1; /* Space between handle and track */
+}
+
+.scrollable-content-horizontal::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #0e5a8a, #3aafca); /* Darken handle on hover */
+}
+

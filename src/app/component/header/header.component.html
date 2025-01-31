@@ -3,7 +3,7 @@
   <!--Main Logo-->
 
 
-  <div class="logo col-span-2 flex items-center cursor-pointer" routerLink="/">
+  <div class="logo col-span-2 col-start-2 flex items-center cursor-pointer" routerLink="/">
     <img [attr.src]="path" alt="logo">
     <h1 class="text-2xl text-white">SnapShop</h1>
   </div>
@@ -23,15 +23,13 @@
     <div class=" col-start-5 col-end-9 place-items-center "><h1 class="text-white">Snap Shop Welcome's You</h1></div>
   }
 
+
   <!--profile dropdown-->
-
-
-
 
   <div class="grid col-span-2 col-start-11 z-10 ">
     @if (authService.isLoggedIn ) {
       <div class="btn-group" dropdown>
-        <button type="button" class="btn btn-outline-light flex align-items-center justify-center ">
+        <button type="button" class="btn  flex align-items-center justify-center ">
           @if (authService.isAdmin) {
             <button class="profile-button" routerLink="/admin">
             <i class="fa fa-shield-alt"></i>
@@ -47,7 +45,7 @@
         </button>
 
           <button id="button-split" dropdownToggle type="button"
-                  class="btn btn-outline-light  dropdown-toggle dropdown-toggle-split " aria-controls="dropdown-split">
+                  class="btn   dropdown-toggle dropdown-toggle-split " aria-controls="dropdown-split">
             <span class="caret"></span>
             <span class="sr-only visually-hidden">Split button!</span>
           </button>
@@ -86,17 +84,20 @@
 
 <!-- Category Tab-->
 
-@if (authService.isLoggedIn) {
-  <nav class="  mb-2 grid row-start-2">
-    <div class="header-bottom ">
+<hr>
+
+  <nav class="mb-2 grid row-start-2">
+    @if (authService.isLoggedIn) {
+    <div class="header-bottom  ">
       <ul class="flex text-white cursor-pointer ">
         @for (category of categoryList; track $index) {
           <li class="grid col-span-1" (click)="searchCategory(category._id!)"><a>{{ category.name }}</a></li>
         }
       </ul>
     </div>
+    }
   </nav>
-}
+
 
 <!--  Profile button-->
 <!--  <div class="profile-link grid col-span-2 col-start-9 col-end-10  place-items-center">-->

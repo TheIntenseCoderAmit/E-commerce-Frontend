@@ -1,7 +1,7 @@
 :host {
   height: 100vh;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) min-content;
   grid-template-rows: min-content 1fr;
   grid-template-areas: "header" "main";
 }
@@ -9,10 +9,13 @@
 .header {
   grid-area: header;
   z-index: 100;
+  position: fixed;
+  width: 100%;
 }
 
 .main {
   grid-area: main;
+  margin-top: 100px;
 }
 
 /*# sourceMappingURL=app.component.css.map */

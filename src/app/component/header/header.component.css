@@ -63,4 +63,8 @@ header {
   font-weight: bold;
 }
 
+nav {
+  background-image: linear-gradient(to right, #FC354C, #0ABFBC);
+}
+
 /*# sourceMappingURL=header.component.css.map */
