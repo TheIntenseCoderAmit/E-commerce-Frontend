@@ -14,6 +14,6 @@ RUN rm -rf *
 
 # copy  the build anguylar app froom the build stage
 
-COPY --from=build /app/dist/Webapp/browser .
+COPY --from=build /app/dist/webapp/browser .
 EXPOSE 80
 ENTRYPOINT ["nginx" , "-g", "daemon off;"]
